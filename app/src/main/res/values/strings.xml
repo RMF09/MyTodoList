@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">My Todo List</string>
+    <string name="app_name">My Todo List</string>d
+    <string name="task_title">Title</string>
+    <string name="task_decription">Description</string>
+    <string name="task_due_date">Due Date</string>
+
+    <string name="placeholder_task_title">Enter Title</string>
+    <string name="placeholder_task_decription">Enter Description</string>
+    <string name="placeholder_task_due_date">Select Due Date</string>
 </resources>
