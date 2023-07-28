@@ -7,4 +7,5 @@ sealed class AddEditTaskUIEvent {
     data class OnChangeDescription(val value: String) : AddEditTaskUIEvent()
     data class OnChangeDueDate(val value: LocalDate) : AddEditTaskUIEvent()
     object OnClickAddEditButton: AddEditTaskUIEvent()
+    object OnDismissDialog: AddEditTaskUIEvent()
 }

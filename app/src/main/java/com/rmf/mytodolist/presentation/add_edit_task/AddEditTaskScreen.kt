@@ -23,6 +23,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
+import com.rmf.mytodolist.ui.composable.SuccessDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Destination
@@ -126,6 +127,17 @@ fun AddEditTaskScreen(
                 ),
                 modifier = Modifier.clickable { stateCalendar.show() }
             )
+        }
+    }
+
+    if (viewModel.state.isSuccess) {
+        val description =
+            if (isEditMode) R.string.text_success_edit_task_description else R.string.text_success_add_new_task_description
+        SuccessDialog(
+            title = stringResource(id = R.string.title_success),
+            description = stringResource(id = description)
+        ) {
+            viewModel.onEvent(AddEditTaskUIEvent.OnDismissDialog)
         }
     }
 

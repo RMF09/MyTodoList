@@ -8,7 +8,7 @@
     <string name="placeholder_task_decription">Enter Description</string>
     <string name="placeholder_task_due_date">Select Due Date</string>
 
-    <string name="title_add_task">Add Task</string>
+    <string name="title_add_task">Add New Task</string>
     <string name="title_edit_task">Edit Task</string>
     <string name="text_button_add">Add</string>
     <string name="text_button_edit">Edit</string>
@@ -17,4 +17,7 @@
     <string name="text_message_error_title_is_blank">Please fill the title</string>
     <string name="text_message_error_description_is_blank">Please fill the description</string>
     <string name="text_message_error_due_date_not_selected">Please select for due date</string>
+    <string name="title_success">Success</string>
+    <string name="text_success_add_new_task_description">New task added successfully</string>
+    <string name="text_success_edit_task_description">Task updated successfully</string>
 </resources>

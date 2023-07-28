@@ -54,6 +54,9 @@ class AddEditTaskViewModel @Inject constructor(
             AddEditTaskUIEvent.OnClickAddEditButton -> {
                 if (isEditMode) edit() else add()
             }
+            AddEditTaskUIEvent.OnDismissDialog -> {
+                state = state.copy(isSuccess = false)
+            }
         }.exhaustive
     }
 
@@ -75,6 +78,7 @@ class AddEditTaskViewModel @Inject constructor(
                     dueDate = state.dueDate
                 )
             )
+            state = state.copy(isSuccess = true)
         }
     }
 
