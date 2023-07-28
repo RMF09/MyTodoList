@@ -68,7 +68,8 @@ fun AddEditTaskScreen(
         },
         bottomBar = {
             Button(
-                onClick = { }, modifier = Modifier
+                onClick = { viewModel.onEvent(AddEditTaskUIEvent.OnClickAddEditButton) },
+                modifier = Modifier
                     .fillMaxWidth()
                     .padding(12.dp)
             ) {

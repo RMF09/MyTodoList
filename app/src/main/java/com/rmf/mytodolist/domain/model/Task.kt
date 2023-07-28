@@ -6,11 +6,15 @@ import java.time.LocalDate
 
 @Parcelize
 data class Task(
+    val id: Int,
     val title: String,
     val description: String,
-    val dueDate: LocalDate,
+    val dueDate: LocalDate? = null,
 ) : Parcelable {
-    val displayDueDate : String get(){
-        return "${dueDate.dayOfMonth}-${dueDate.monthValue}-${dueDate.year}"
-    }
+    val displayDueDate: String
+        get() {
+            return if (dueDate != null)
+                "${dueDate.dayOfMonth}-${dueDate.monthValue}-${dueDate.year}"
+            else ""
+        }
 }

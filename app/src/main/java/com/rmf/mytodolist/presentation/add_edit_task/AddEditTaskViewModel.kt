@@ -1,19 +1,25 @@
 package com.rmf.mytodolist.presentation.add_edit_task
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
+import com.rmf.mytodolist.domain.repository.TaskRepository
 import com.rmf.mytodolist.util.exhaustive
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class AddEditTaskViewModel @Inject constructor(
-    private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle,
+    private val application: Application
 ) : ViewModel() {
 
     private val isEditMode = savedStateHandle.get<Boolean>("isEditMode") ?: false
@@ -21,7 +27,7 @@ class AddEditTaskViewModel @Inject constructor(
     var state by mutableStateOf(AddEditTaskState())
 
     init {
-        Log.e("TAG", "addEditTask: $isEditMode, $task" )
+        Log.e("TAG", "addEditTask: $isEditMode, $task")
         if (isEditMode) {
             task?.let { task ->
                 state = state.copy(
@@ -44,8 +50,20 @@ class AddEditTaskViewModel @Inject constructor(
             is AddEditTaskUIEvent.OnChangeTitle -> {
                 state = state.copy(title = e.value)
             }
+            AddEditTaskUIEvent.OnClickAddEditButton -> {
+                if (isEditMode) edit() else add()
+            }
         }.exhaustive
     }
 
-    private fun add() {}
+    private fun validate(): Boolean {
+        return if (state.title.isBlank()) {
+            state =
+                state.copy(error = application.getString(R.string.text_message_error_title_is_blank))
+            false
+        } else true
+    }
+
+    private fun add(){}
+    private fun edit(){}
 }

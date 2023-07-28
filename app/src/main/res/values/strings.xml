@@ -12,4 +12,9 @@
     <string name="title_edit_task">Edit Task</string>
     <string name="text_button_add">Add</string>
     <string name="text_button_edit">Edit</string>
+    <string name="text_empty_list">The task list is empty</string>
+    <string name="text_empty_list_description">Tap the \'+\' button to add a new task</string>
+    <string name="text_message_error_title_is_blank">Please fill the title</string>
+    <string name="text_message_error_description_is_blank">Please fill the description</string>
+    <string name="text_message_error_due_date_not_selected">Please select for due date</string>
 </resources>
