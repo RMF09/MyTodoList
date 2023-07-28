@@ -23,6 +23,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
 import com.rmf.mytodolist.presentation.destinations.AddEditTaskScreenDestination
+import com.rmf.mytodolist.presentation.destinations.DetailTaskScreenDestination
+import com.rmf.mytodolist.presentation.detail_task.DueDateText
 
 @OptIn(ExperimentalMaterial3Api::class)
 @RootNavGraph(start = true)
@@ -80,10 +82,7 @@ fun ListTaskScreen(
                     task = item,
                     onClick = { task ->
                         navigator.navigate(
-                            AddEditTaskScreenDestination(
-                                isEditMode = true,
-                                task = task
-                            )
+                            DetailTaskScreenDestination(task = task)
                         )
                     }
                 )
@@ -103,15 +102,14 @@ fun ItemTask(modifier: Modifier = Modifier, task: Task, onClick: (Task) -> Unit)
         ) {
             Text(text = task.title, style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(6.dp))
-            Text(text = task.description, style = MaterialTheme.typography.bodyLarge)
-            Spacer(modifier = Modifier.height(4.dp))
-            Text(
-                text = task.displayDueDate,
-                fontSize = 12.sp,
-                color = Color.Red,
-                textAlign = TextAlign.End,
-                modifier = Modifier.fillMaxWidth()
-            )
+            if (task.displayDueDate.isNotBlank())
+                Box(modifier = Modifier.fillMaxWidth()) {
+                    DueDateText(
+                        text = task.displayDueDate, modifier = Modifier.align(
+                            Alignment.CenterEnd
+                        )
+                    )
+                }
         }
     }
 }

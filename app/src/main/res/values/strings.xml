@@ -20,4 +20,5 @@
     <string name="title_success">Success</string>
     <string name="text_success_add_new_task_description">New task added successfully</string>
     <string name="text_success_edit_task_description">Task updated successfully</string>
+    <string name="title_detail_task">Detail Task</string>
 </resources>
