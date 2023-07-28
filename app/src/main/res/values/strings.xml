@@ -7,4 +7,9 @@
     <string name="placeholder_task_title">Enter Title</string>
     <string name="placeholder_task_decription">Enter Description</string>
     <string name="placeholder_task_due_date">Select Due Date</string>
+
+    <string name="title_add_task">Add Task</string>
+    <string name="title_edit_task">Edit Task</string>
+    <string name="text_button_add">Add</string>
+    <string name="text_button_edit">Edit</string>
 </resources>

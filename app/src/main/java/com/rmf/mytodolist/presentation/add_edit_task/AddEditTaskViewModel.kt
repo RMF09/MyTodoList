@@ -1,5 +1,6 @@
 package com.rmf.mytodolist.presentation.add_edit_task
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -16,12 +17,13 @@ class AddEditTaskViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val isEditMode = savedStateHandle.get<Boolean>("isEditMode") ?: false
-    private val taskWantBeEdited = savedStateHandle.get<Task>("taskWantBeEdited")
+    private val task = savedStateHandle.get<Task>("task")
     var state by mutableStateOf(AddEditTaskState())
 
     init {
+        Log.e("TAG", "addEditTask: $isEditMode, $task" )
         if (isEditMode) {
-            taskWantBeEdited?.let { task ->
+            task?.let { task ->
                 state = state.copy(
                     title = task.title,
                     description = task.description,

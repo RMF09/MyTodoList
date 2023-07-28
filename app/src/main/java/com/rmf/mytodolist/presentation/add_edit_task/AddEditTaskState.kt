@@ -6,4 +6,11 @@ data class AddEditTaskState(
     val title: String = "",
     val description: String = "",
     val dueDate: LocalDate? = null
-)
+){
+    val displayDueDate : String get(){
+        return if(dueDate !=null)
+         "${dueDate.dayOfMonth}-${dueDate.monthValue}-${dueDate.year}"
+        else
+            ""
+    }
+}

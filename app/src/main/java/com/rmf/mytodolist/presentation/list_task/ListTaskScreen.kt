@@ -52,6 +52,14 @@ fun ListTaskScreen(
             }
             items(20) { item ->
                 ItemTask(
+                    onClick = { task ->
+                        navigator.navigate(
+                            AddEditTaskScreenDestination(
+                                isEditMode = true,
+                                task = task
+                            )
+                        )
+                    },
                     task = Task(
                         title = "Title $item",
                         description = "Description $item",
@@ -63,9 +71,10 @@ fun ListTaskScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ItemTask(modifier: Modifier = Modifier, task: Task) {
-    Card(modifier = modifier.fillMaxWidth()) {
+fun ItemTask(modifier: Modifier = Modifier, task: Task, onClick: (Task) -> Unit) {
+    Card(onClick = { onClick(task) }, modifier = modifier.fillMaxWidth()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
