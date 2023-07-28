@@ -19,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class AddEditTaskViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
+    private val taskRepository: TaskRepository,
     private val application: Application
 ) : ViewModel() {
 
@@ -64,6 +65,18 @@ class AddEditTaskViewModel @Inject constructor(
         } else true
     }
 
-    private fun add(){}
-    private fun edit(){}
+    private fun add() {
+        viewModelScope.launch {
+            taskRepository.saveTask(
+                Task(
+                    id = 0,
+                    title = state.title,
+                    description = state.description,
+                    dueDate = state.dueDate
+                )
+            )
+        }
+    }
+
+    private fun edit() {}
 }
