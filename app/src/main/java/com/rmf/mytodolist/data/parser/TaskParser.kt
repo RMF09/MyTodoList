@@ -9,7 +9,8 @@ fun TaskEntity.toTask() =
         id = id,
         title = title,
         description = description,
-        dueDate = dueDate.toLocalDate()
+        dueDate = dueDate.toLocalDate(),
+        isCompleted = isCompleted
     )
 
 fun Task.toEntity() =
@@ -17,5 +18,6 @@ fun Task.toEntity() =
         id = id,
         title = title,
         description = description,
-        dueDate = displayDueDate
+        dueDate = displayDueDate,
+        isCompleted = isCompleted
     )

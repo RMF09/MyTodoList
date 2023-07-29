@@ -10,6 +10,7 @@ data class Task(
     val title: String,
     val description: String,
     val dueDate: LocalDate? = null,
+    val isCompleted: Boolean = false
 ) : Parcelable {
     val displayDueDate: String
         get() {

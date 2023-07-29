@@ -81,55 +81,60 @@ fun AddEditTaskScreen(
             }
         }
     ) {
-        Column(
+        Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(it)
-                .verticalScroll(rememberScrollState()),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(6.dp)
-        ) {
-            TextField(
-                value = state.title,
-                label = {
-                    Text(text = stringResource(id = R.string.task_title))
-                },
-                placeholder = {
-                    Text(text = stringResource(id = R.string.placeholder_task_title))
-                },
-                onValueChange = { value ->
-                    viewModel.onEvent(AddEditTaskUIEvent.OnChangeTitle(value))
-                }
-            )
-            TextField(
-                value = state.description,
-                label = {
-                    Text(text = stringResource(id = R.string.task_decription))
-                },
-                placeholder = {
-                    Text(text = stringResource(id = R.string.placeholder_task_decription))
-                },
-                onValueChange = { value ->
-                    viewModel.onEvent(AddEditTaskUIEvent.OnChangeDescription(value))
-                }
-            )
-            TextField(
-                enabled = false,
-                value = state.displayDueDate,
-                label = {
-                    Text(text = stringResource(id = R.string.task_due_date))
-                },
-                placeholder = {
-                    Text(text = stringResource(id = R.string.placeholder_task_due_date))
-                },
-                onValueChange = {},
-                colors = TextFieldDefaults.textFieldColors(
-                    disabledTextColor = MaterialTheme.colorScheme.onSurface,
-                    disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                    disabledPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant
-                ),
-                modifier = Modifier.clickable { stateCalendar.show() }
-            )
+        ){
+            Column(
+                modifier = Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(6.dp)
+            ) {
+                TextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.title,
+                    label = {
+                        Text(text = stringResource(id = R.string.task_title))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(id = R.string.placeholder_task_title))
+                    },
+                    onValueChange = { value ->
+                        viewModel.onEvent(AddEditTaskUIEvent.OnChangeTitle(value))
+                    }
+                )
+                TextField(
+                    modifier = Modifier.fillMaxWidth(),
+                    value = state.description,
+                    label = {
+                        Text(text = stringResource(id = R.string.task_decription))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(id = R.string.placeholder_task_decription))
+                    },
+                    onValueChange = { value ->
+                        viewModel.onEvent(AddEditTaskUIEvent.OnChangeDescription(value))
+                    }
+                )
+                TextField(
+                    enabled = false,
+                    value = state.displayDueDate,
+                    label = {
+                        Text(text = stringResource(id = R.string.task_due_date))
+                    },
+                    placeholder = {
+                        Text(text = stringResource(id = R.string.placeholder_task_due_date))
+                    },
+                    onValueChange = {},
+                    colors = TextFieldDefaults.textFieldColors(
+                        disabledTextColor = MaterialTheme.colorScheme.onSurface,
+                        disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                        disabledPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant
+                    ),
+                    modifier = Modifier.fillMaxWidth().clickable { stateCalendar.show() }
+                )
+            }
         }
     }
 
