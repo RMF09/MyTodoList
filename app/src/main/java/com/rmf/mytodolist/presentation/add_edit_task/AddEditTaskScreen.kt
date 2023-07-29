@@ -26,6 +26,7 @@ import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
 import com.rmf.mytodolist.presentation.NavGraphs
 import com.rmf.mytodolist.presentation.destinations.ListTaskScreenDestination
+import com.rmf.mytodolist.ui.composable.ErrorDialog
 import com.rmf.mytodolist.ui.composable.SuccessDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -87,7 +88,9 @@ fun AddEditTaskScreen(
                 .padding(it)
         ){
             Column(
-                modifier = Modifier.verticalScroll(rememberScrollState()).padding(horizontal = 16.dp),
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 16.dp),
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(6.dp)
             ) {
@@ -132,7 +135,9 @@ fun AddEditTaskScreen(
                         disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
                         disabledPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant
                     ),
-                    modifier = Modifier.fillMaxWidth().clickable { stateCalendar.show() }
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable { stateCalendar.show() }
                 )
             }
         }
@@ -147,6 +152,12 @@ fun AddEditTaskScreen(
         ) {
             viewModel.onEvent(AddEditTaskUIEvent.OnDismissDialog)
             navigator.popBackStack(ListTaskScreenDestination, false)
+        }
+    }
+
+    viewModel.state.error?.let { message ->
+        ErrorDialog(title = stringResource(id = R.string.title_error), description = message ) {
+            viewModel.onEvent(AddEditTaskUIEvent.OnDismissDialog)
         }
     }
 

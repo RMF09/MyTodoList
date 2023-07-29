@@ -30,6 +30,7 @@ import com.rmf.mytodolist.domain.model.Task
 import com.rmf.mytodolist.presentation.destinations.AddEditTaskScreenDestination
 import com.rmf.mytodolist.presentation.destinations.DetailTaskScreenDestination
 import com.rmf.mytodolist.presentation.detail_task.DueDateText
+import com.rmf.mytodolist.ui.composable.ErrorDialog
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @RootNavGraph(start = true)
@@ -41,6 +42,7 @@ fun ListTaskScreen(
 ) {
 
     val listTask by viewModel.task.collectAsState(initial = emptyList())
+    val errorMessage by viewModel.error.collectAsState(null)
 
     Scaffold(
         floatingActionButton = {
@@ -111,6 +113,11 @@ fun ListTaskScreen(
                     })
 
             }
+        }
+    }
+    errorMessage?.let { message ->
+        ErrorDialog(title = stringResource(id = R.string.title_error), description = message) {
+            viewModel.dismissDialog()
         }
     }
 }

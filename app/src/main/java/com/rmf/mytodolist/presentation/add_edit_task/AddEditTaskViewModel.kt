@@ -55,7 +55,7 @@ class AddEditTaskViewModel @Inject constructor(
                 if (isEditMode) edit() else add()
             }
             AddEditTaskUIEvent.OnDismissDialog -> {
-                state = state.copy(isSuccess = false)
+                state = state.copy(isSuccess = false, error = null)
             }
         }.exhaustive
     }
@@ -69,29 +69,46 @@ class AddEditTaskViewModel @Inject constructor(
     }
 
     private fun add() {
+        if (!validate())
+            return
+
         viewModelScope.launch {
-            taskRepository.saveTask(
-                Task(
-                    id = 0,
-                    title = state.title,
-                    description = state.description,
-                    dueDate = state.dueDate
+            state = try {
+                taskRepository.saveTask(
+                    Task(
+                        id = 0,
+                        title = state.title,
+                        description = state.description,
+                        dueDate = state.dueDate
+                    )
                 )
-            )
-            state = state.copy(isSuccess = true)
+                state.copy(isSuccess = true)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                state.copy(error = application.getString(R.string.text_message_error_db_while_save_data))
+            }
         }
     }
 
     private fun edit() {
+        if (!validate())
+            return
+
         viewModelScope.launch {
-            taskRepository.updateTask(
-                task!!.copy(
-                    title = state.title,
-                    description = state.description,
-                    dueDate = state.dueDate
+            state = try {
+                taskRepository.updateTask(
+                    task!!.copy(
+                        title = state.title,
+                        description = state.description,
+                        dueDate = state.dueDate
+                    )
                 )
-            )
-            state = state.copy(isSuccess = true)
+                state.copy(isSuccess = true)
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                state.copy(error = application.getString(R.string.text_message_error_db_while_update_data))
+            }
         }
     }
 }

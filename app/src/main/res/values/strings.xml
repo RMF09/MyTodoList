@@ -21,4 +21,9 @@
     <string name="text_success_add_new_task_description">New task added successfully</string>
     <string name="text_success_edit_task_description">Task updated successfully</string>
     <string name="title_detail_task">Detail Task</string>
+    <string name="text_message_error_db_while_load_data">Something went wrong while loading the tasks from database</string>
+    <string name="text_message_error_db_while_save_data">Something went wrong while adding the new task to database. Please try again later</string>
+    <string name="text_message_error_db_while_update_data">Something went wrong while updating the task to database. Please try again later</string>
+    <string name="text_message_error_db_while_delete_data">Something went wrong while deleting the task to database. Please try again later</string>
+    <string name="title_error">Upss..</string>
 </resources>
