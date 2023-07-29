@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ChevronLeft
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,6 +19,7 @@ import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
+import com.rmf.mytodolist.presentation.destinations.AddEditTaskScreenDestination
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Destination
@@ -37,6 +39,18 @@ fun DetailTaskScreen(
                     }
                 })
         },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                navigator.navigate(
+                    AddEditTaskScreenDestination(
+                        isEditMode = true,
+                        task = task
+                    )
+                )
+            }) {
+                Icon(imageVector = Icons.Default.Edit, contentDescription = null)
+            }
+        }
     ) {
         Box(
             modifier = Modifier

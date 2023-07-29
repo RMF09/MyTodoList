@@ -21,8 +21,11 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import com.ramcosta.composedestinations.navigation.popUpTo
 import com.rmf.mytodolist.R
 import com.rmf.mytodolist.domain.model.Task
+import com.rmf.mytodolist.presentation.NavGraphs
+import com.rmf.mytodolist.presentation.destinations.ListTaskScreenDestination
 import com.rmf.mytodolist.ui.composable.SuccessDialog
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -138,6 +141,7 @@ fun AddEditTaskScreen(
             description = stringResource(id = description)
         ) {
             viewModel.onEvent(AddEditTaskUIEvent.OnDismissDialog)
+            navigator.popBackStack(ListTaskScreenDestination, false)
         }
     }
 

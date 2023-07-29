@@ -82,5 +82,16 @@ class AddEditTaskViewModel @Inject constructor(
         }
     }
 
-    private fun edit() {}
+    private fun edit() {
+        viewModelScope.launch {
+            taskRepository.updateTask(
+                task!!.copy(
+                    title = state.title,
+                    description = state.description,
+                    dueDate = state.dueDate
+                )
+            )
+            state = state.copy(isSuccess = true)
+        }
+    }
 }
